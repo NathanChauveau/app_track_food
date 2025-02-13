@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+  <body>
+    <h1>Journal alimentaire</h1> 
+    <%= link_to "Home", root_path %>
+
+    <% if @product_record.errors.any? %>
+      <div class="alert alert-danger">
+        <h4>Erreur(s) :</h4>
+        <ul>
+          <% @product_record.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: @product_record, local: true do |form| %>
+        <%= form.label :date, "Date of the record" %>
+      <%= form.date_field :date, value: @date %>
+      
+      <h3>Add product in the list </h3>
+    <%= form.fields_for :product_record_products do |product_form| %>
+        <div class="nested-fields">
+          <%= product_form.collection_select :product_id, Product.all, :id, :name, prompt: 'Choose a food' %>
+          <%= product_form.label :quantity, 'Quantity' %>
+          <%= product_form.number_field :quantity, min: 1 %>
+        </div>
+      <% end %>
+      <%= form.submit 'Enregistrer', class: 'btn btn-primary' %>
+    <% end %>
+
+
+    <%= form_with url: product_records_path, method: :get, local: true do %>
+      <%= label_tag :date, 'Select a date' %>
+      <%= date_field_tag :date, params[:date] || Date.today %>
+      <%= submit_tag 'Rechercher', class: 'btn btn-primary' %>
+
+    <% end %>
+
+
+    <h1>Product Records for <%= params[:date] || Date.today %></h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Categorie</th>
+          <th>Quantity</th>
+          <th>Calories</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @product_records.each do |product_record| %>
+          <% if product_record.date == (params[:date] || Date.today).to_date %>
+            <% product_record.product_record_products.each do |product_record_product| %>
+              <tr>
+                <td><%= product_record_product.product.name %></td>
+                <td><%= product_record_product.product.category.name %></td>
+                <td><%= product_record_product.quantity %></td>
+                <td><%= product_record_product.product.kcals * product_record_product.quantity %>kg</td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+  </body>
+</html>

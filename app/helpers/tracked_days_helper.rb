@@ -1,0 +1,2 @@
+module TrackedDaysHelper
+end

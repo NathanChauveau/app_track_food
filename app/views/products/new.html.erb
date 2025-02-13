@@ -1,0 +1,33 @@
+<html>
+    <head>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+    </head>
+    <body>
+        <h1>Add a new product</h1>
+        <%= form_with model: @product do |f| %>
+            <p>
+                <%= f.label :name %><br>
+                <%= f.text_field :name %>
+            </p>
+            <p>
+                <%= f.label :category %><br>
+                <%= f.collection_select :category_id ,@categories, :id, :name, prompt: "Choose a category" %>
+            </p>
+            <p>
+                <%= f.label :kcals %><br>
+                <%= f.number_field :kcals %>
+            </p>
+            <p>
+                <%= f.label :image %><br>
+
+                <%= f.file_field :image%>
+
+            </p>
+            <p>
+                <%= f.submit %>
+            </p>
+
+
+        <% end %>
+    </body>
+</html>

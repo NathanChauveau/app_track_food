@@ -1,0 +1,16 @@
+<html>
+<head>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+</head>
+<body>
+    <h1>ID of product : <%= @product.id %></h1><br>
+
+    Showcase: <br> <%= image_tag @product.image_url if @product.image %><br>
+    Name: <%= @product.name %><br>
+    Category: <%= @product.category.name %><br>
+    Calories: <%= @product.kcals %>/kg<br>
+    
+    <%= link_to 'Back', products_path %>
+</body>
+</html>
+
