@@ -1,0 +1,26 @@
+<h1>Food track for the <%= @product_record.date %></h1>
+
+<p>Weight saved for this day: <%= @product_record.weight %> kg</p>
+
+<h2>Products</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Calories per unit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product_record_products.each do |product_record_product| %>
+      <tr>
+        <td><%= product_record_product.product.name %></td>
+        <td><%= product_record_product.quantity %></td>
+        <td><%= product_record_product.product.kcals %> kcal</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    total kcals consumed: <%= @product_record_products.sum { |prp| prp.product.kcals * prp.quantity } %> <br>
+
+<%= link_to "Back to records", product_records_path %>

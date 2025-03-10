@@ -32,3 +32,10 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+.vscode/launch.json
+public/uploads/25f63cb2c9c044f642433372e8296262.jpg
+public/uploads/cache/66e1bd26e7954897b96b368e412c35ea.jpg
+test/controllers/product_record_products_controller_test.rb
+
+config/.env
+.vscode/launch.json

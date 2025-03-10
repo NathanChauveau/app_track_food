@@ -1,12 +1,14 @@
 <html>
 <head>
-  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag "application", media: "all" %>
 </head>
 <body> 
 <% if user_signed_in? %>
-  <p>Bienvenue, <%=@user%> !</p>
+  <p>welcome, <%= @user %> !</p>
       <%= button_to "Log out", destroy_user_session_path, method: :delete %>
-      <%= link_to "Journal d'alimentation", product_records_path, method: :index %>
+      <%= link_to "Your food diary", product_records_path, method: :index %><br>
+<%= link_to "Your weight evolution", graph_path %><br>
+      Add a new product: <%= link_to "New product", new_product_path %><br>
     </nav>
 <% end %>
     <nav>
@@ -16,27 +18,16 @@
 <h3>Current date: <%= Time.now.strftime("%A %d/%m/%Y ") %></h3>
 
 <h3>List of product:</h3>
-<%@products.each do |product|%>
+<% @products.each do |product| %>
 Name: <%= product.name %><br>
 Showcase: <br> <%= image_tag product.image_url if product.image %><br>
 Category: <%= product.category.name %><br>
 Calories: <%= product.kcals %>/kg<br>
 See details: <%= link_to "Details", product_path(product) %><br>
 Remove it: <%= button_to "Delete", product_path(product), method: :delete %><br>
-<%end%>
-
-Add a new product: <%= link_to "New product", new_product_path %>
-
-<h3>Add your weight:</h3>
-<%= form_with model: current_user, url: registration_path(current_user), method: :patch, local: true do |form| %>
-  <div class="field">
-    <%= form.label :weight, "Weight (kg)" %>
-    <%= form.number_field :weight, step: 0.1 %>
-  </div>
-  <div class="actions">
-    <%= form.submit "Save Weight" %>
-  </div>
 <% end %>
+
+
 
 
 </body>

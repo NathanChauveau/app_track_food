@@ -1,0 +1,17 @@
+<h1>Create a new product record</h1>
+
+<%= form_with model: @product_record, local: true do |form| %>
+  <div class="field">
+    <%= form.label :date, "Date of the record" %>
+    <%= form.date_field :date %>
+  </div>
+  <div class="field">
+    <%= form.label :weight, "Weight during the day (kg)" %>
+    <%= form.number_field :weight, min: 0 %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= link_to "Back to records", product_records_path %>

@@ -1,0 +1,17 @@
+<h1>Add a product to your record</h1>
+
+<%= form_with model: [@product_record, @product_record_product], local: true do |form| %>
+  <div class="field">
+    <%= form.label :product_id, "Choose a food" %>
+    <%= form.collection_select :product_id, Product.all, :id, :name, prompt: 'Choose a food' %>
+  </div>
+  <div class="field">
+    <%= form.label :quantity, 'Quantity' %>
+    <%= form.number_field :quantity, min: 1 %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Add', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= link_to "Back to records", product_records_path %>

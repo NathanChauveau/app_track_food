@@ -6,4 +6,5 @@ class ProductRecord < ApplicationRecord
   accepts_nested_attributes_for :product_record_products, allow_destroy: true
 
   validates :date, presence: true
+  validates :weight, presence: true, numericality: { greater_than: 0 }
 end

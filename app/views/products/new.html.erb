@@ -3,6 +3,7 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
     </head>
     <body>
+        <%= link_to 'Back', products_path %> <br>
         <h1>Add a new product</h1>
         <%= form_with model: @product do |f| %>
             <p>

@@ -1,0 +1,13 @@
+<h1>Weight Graph</h1>
+
+<p>DEBUG VIEW: <%= @weight_data.inspect %></p>
+
+
+<% if @weight_data.present? %>
+  <%= line_chart @weight_data, xtitle: "Date", ytitle: "Poids (kg)", height: "500px" %>
+<% else %>
+  <p>Aucune donnée disponible pour les 30 derniers jours.</p>
+<% end %>
+
+<p> test </p>
+<%= line_chart({ "2025-02-25" => 70, "2025-02-26" => 80 }) %>

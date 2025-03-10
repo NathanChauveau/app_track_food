@@ -1,3 +1,5 @@
+require 'dotenv/rails-now'
+
 # SQLite. Versions 3.8.0 and up are supported.
 #   gem install sqlite3
 #
@@ -27,7 +29,12 @@ development:
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
-  <<: *default
-  database: trackfood_production
-  username: root
-  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  host: <%= ENV['DB_HOST'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  port: 3306
+  timeout: 5000

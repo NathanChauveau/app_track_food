@@ -1,0 +1,2 @@
+module ProductRecordProductsHelper
+end
